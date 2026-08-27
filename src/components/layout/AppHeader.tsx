@@ -34,12 +34,6 @@ export function AppHeader() {
 
         <nav className="navigation-menu">
 
-          <Link
-            to="/"
-            className="navigation-link"
-          >
-            Inicio
-          </Link>
 
           {user ? (
             <>

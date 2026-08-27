@@ -1,75 +1,153 @@
-# React + TypeScript + Vite
+# TodoTask
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+TodoTask es una aplicación web de gestión de tareas desarrollada con **React, TypeScript, Vite y CSS**.
 
-Currently, two official plugins are available:
+El objetivo del proyecto es permitir al usuario crear, visualizar, modificar, completar y eliminar tareas de manera sencilla, manteniendo la información almacenada directamente en el navegador.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 🚀 Tecnologías utilizadas
 
-## React Compiler
+* **React** — Desarrollo de la interfaz de usuario.
+* **TypeScript** — Tipado estático y mayor seguridad durante el desarrollo.
+* **Vite** — Herramienta utilizada para el entorno de desarrollo y compilación.
+* **CSS** — Diseño y estilos de la aplicación.
+* **LocalStorage** — Persistencia de la información de las tareas en el navegador.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 💾 Almacenamiento de datos
 
-## Expanding the ESLint configuration
+TodoTask **no utiliza un backend ni una base de datos externa**.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+La información de las tareas se almacena directamente en el **LocalStorage del navegador** mediante la API `localStorage`.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+Esto permite que:
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+* Las tareas permanezcan guardadas después de cerrar el navegador.
+* No sea necesario utilizar un servidor backend.
+* No sea necesaria una base de datos externa.
+* La aplicación pueda funcionar completamente desde el frontend.
+* Los datos permanezcan almacenados localmente en el dispositivo del usuario.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+> **Importante:** los datos almacenados en LocalStorage pertenecen al navegador y dispositivo donde se utiliza la aplicación. Si se elimina el almacenamiento del navegador, los datos guardados también pueden eliminarse.
 
+## 📋 Funcionalidades
+
+TodoTask permite gestionar las tareas mediante las siguientes funcionalidades:
+
+* Crear nuevas tareas.
+* Visualizar tareas existentes.
+* Editar tareas.
+* Marcar tareas como completadas.
+* Eliminar tareas.
+* Mantener las tareas almacenadas utilizando LocalStorage.
+* Recuperar automáticamente las tareas almacenadas al iniciar la aplicación.
+
+## 🏗️ Arquitectura
+
+La aplicación utiliza una arquitectura **Frontend Only**:
+
+```text
+┌─────────────────────────────┐
+│          TodoTask           │
+│                             │
+│       React + TypeScript    │
+│                             │
+│           Vite              │
+│                             │
+│            CSS              │
+└──────────────┬──────────────┘
+               │
+               ▼
+┌─────────────────────────────┐
+│        LocalStorage         │
+│                             │
+│   Persistencia de tareas    │
+└─────────────────────────────┘
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+No existe comunicación con un backend Node.js para almacenar las tareas.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 📦 Instalación
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+Clona el repositorio:
 
+```bash
+git clone https://github.com/MartaDiazV/TodoTask
 ```
+
+Ingresa al directorio del proyecto:
+
+```bash
+cd todotask
+```
+
+Instala las dependencias:
+
+```bash
+npm install
+```
+
+## ▶️ Ejecutar el proyecto
+
+Para iniciar el entorno de desarrollo:
+
+```bash
+npm run dev
+```
+
+Luego abre en el navegador la dirección proporcionada por Vite, normalmente:
+
+```text
+http://localhost:5173
+```
+
+## 🏗️ Compilar para producción
+
+Para generar la versión optimizada para producción:
+
+```bash
+npm run build
+```
+
+Para probar localmente la versión compilada:
+
+```bash
+npm run preview
+```
+
+## 📁 Estructura del proyecto
+
+Una estructura aproximada del proyecto es:
+
+```text
+todotask/
+├── public/
+├── src/
+│   ├── components/
+│   ├── pages/
+│   ├── services/
+│   ├── types/
+│   ├── styles/
+│   ├── App.tsx
+│   └── main.tsx
+├── package.json
+├── tsconfig.json
+├── vite.config.ts
+└── README.md
+```
+
+## 🔐 Privacidad de los datos
+
+TodoTask no envía las tareas a un servidor externo.
+
+La información se mantiene localmente en el navegador mediante **LocalStorage**, por lo que los datos no se sincronizan automáticamente entre diferentes dispositivos o navegadores.
+
+## 📌 Estado del proyecto
+
+**TodoTask** es un proyecto desarrollado con fines de aprendizaje y práctica en el desarrollo de aplicaciones web modernas utilizando React y TypeScript.
+
+---
+
+### 🛠️ Stack
+
+**React · TypeScript · Vite · CSS · LocalStorage**
+
+**TodoTask — Gestión de tareas directamente desde tu navegador.**

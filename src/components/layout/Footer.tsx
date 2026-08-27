@@ -1,4 +1,3 @@
-
 export function Footer() {
   return (
     <footer className="app-footer">
@@ -13,20 +12,6 @@ export function Footer() {
           <p>
             Organiza tus tareas. Simplifica tu día.
           </p>
-        </div>
-
-        <div className="footer-links">
-          <a href="/privacy">
-            Privacidad
-          </a>
-
-          <a href="/terms">
-            Términos
-          </a>
-
-          <a href="/contact">
-            Contacto
-          </a>
         </div>
 
       </div>
